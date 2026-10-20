@@ -175,13 +175,14 @@ aside > h2 {
 .card {
   flex: 0 0 calc(50% - var(--gap) / 2);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;       /* kép elöl, a szöveg mellette */
   background: var(--paper);
   border: 1px solid var(--line);
 }
 
 .image-placeholder {
-  aspect-ratio: 16 / 9;
+  flex: 0 0 40%;             /* a kép a kártya 40%-a */
+  min-height: 150px;
   background: var(--tint);
   color: var(--muted);
   font-size: 0.875rem;
@@ -196,6 +197,7 @@ aside > h2 {
 
 .card-content {
   flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -259,6 +261,80 @@ footer {
   gap: 0.5rem;
 }
 
+/* ---------- Űrlap ---------- */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+
+input {
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--ink);
+}
+
+input[type="text"],
+input[type="date"],
+input[type="datetime-local"] {
+  width: 100%;
+  max-width: 28rem;
+  padding: 0.6rem 0.75rem;
+  background: var(--paper);
+  border: 1px solid var(--muted);
+  border-radius: 2px;
+}
+
+input[type="text"]:focus-visible,
+input[type="date"]:focus-visible,
+input[type="datetime-local"]:focus-visible,
+input[type="color"]:focus-visible,
+input[type="checkbox"]:focus-visible,
+input[type="button"]:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+input[type="button"] {
+  padding: 0.6rem 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--accent);
+  border: 0;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+input[type="button"]:hover {
+  background: var(--ink);
+}
+
+input[type="checkbox"] {
+  width: 1.5rem;
+  height: 1.5rem;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+input[type="color"] {
+  width: 4rem;
+  height: 2.5rem;
+  padding: 0.15rem;
+  background: var(--paper);
+  border: 1px solid var(--muted);
+  border-radius: 2px;
+  cursor: pointer;
+}
+
 /* ---------- Bordererek ---------- */
 .site-header { border: 2px solid red; }
 .logo-placeholder { border: 2px solid orange; }
@@ -272,10 +348,14 @@ main { border: 2px solid blue; }
 .main-content { border: 2px solid teal; padding: 1rem; }
 .card-container { border: 2px dashed teal; padding: 0.5rem; }
 .card { border: 2px solid #0d9488; }
-.image-placeholder { border-bottom: 2px solid #0d9488; }
+.image-placeholder { border-right: 2px solid #0d9488; }
 
 aside { border: 2px solid crimson; padding: 1rem; }
 .aside-box { border: 2px solid #be123c; }
+
+form { border: 2px solid #b45309; padding: 0.5rem; }
+.form-row { border: 2px solid #d97706; }
+input[type] { border: 2px solid #7c3aed; }
 
 footer { border: 2px solid red; }
 
@@ -306,5 +386,14 @@ footer { border: 2px solid red; }
 @media (max-width: 600px) {
   .card {
     flex-basis: 100%;
+    flex-direction: column;   /* a kép a szöveg fölé kerül */
+  }
+
+  .image-placeholder {
+    flex: none;
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+    border-right: 0;
+    border-bottom: 2px solid #0d9488;
   }
 }
